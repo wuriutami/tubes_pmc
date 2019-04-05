@@ -66,7 +66,7 @@ int input_minggu(){
         scanf("%d",&d);
     } while ((d<3)||(d>15));
     printf("Minggu %d\n",d);
-    return d;
+    return d-3;
 }
 int input_hari(int prak, int s_r){
     char s[255];
@@ -137,7 +137,7 @@ int max_rom(int prak){
 void input_sch(jadwal_t j[][5], prak_t *p){
     char s[225];
     int prak=3;
-    int w, h, r, s_r;
+    int w, h, r, s_r,l;
     s_r=0;
     do{
         do
@@ -162,18 +162,25 @@ void input_sch(jadwal_t j[][5], prak_t *p){
                                 h = input_hari(prak,s_r);
                                 printf("Ruangan 1:\n");
                                 r = input_ruangan(1,0);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2205[(2*s_r)-12]);
-                                p[prak].r[(2*s_r)-12].count++;
+                                l = str2enum_lab(ruangan[r]);
+                                if ((p[prak].r[(2*s_r)-12].count<7)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2205[(2*s_r)-12]);
+                                    p[prak].r[(2*s_r)-12].count++;
+                                    j[w][h].lab[l].count++;
+                                }
+                        
                                 printf("Ruangan 2:\n");
                                 r = input_ruangan(2,0);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2205[(2*s_r)-11]);
-                                p[prak].r[(2*s_r)-11].count++;
-                                
-                                    
+                                l = str2enum_lab(ruangan[r]);
+                                if ((p[prak].r[(2*s_r)-12].count<7)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2205[(2*s_r)-11]);
+                                    p[prak].r[(2*s_r)-11].count++;  
+                                    j[w][h].lab[l].count++;  
+                                }  
                             }else if (s_r == -1)
                             {
                                     /* code */
@@ -184,12 +191,15 @@ void input_sch(jadwal_t j[][5], prak_t *p){
                                 w = input_minggu()-1;
                                 h = input_hari(prak,s_r);
                                 r = input_ruangan(0,0);
+                                l = str2enum_lab(ruangan[r]);
                                     //printf("Tes awal %d %d %d itu\n", w, h, r);
-                    
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2205[s_r]);
-                                p[prak].r[s_r].count++;
+                                if ((p[prak].r[s_r].count<7)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2205[s_r]);
+                                    p[prak].r[s_r].count++;
+                                    j[w][h].lab[l].count++;
+                                }
                             }
                                 
                             
@@ -203,22 +213,34 @@ void input_sch(jadwal_t j[][5], prak_t *p){
                                 h = input_hari(prak,s_r);
                                 printf("Ruangan 1:\n");
                                 r = input_ruangan(1,1);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2208[(3*s_r)-21]);
-                                p[prak].r[(3*s_r)-21].count++;
+                                l = str2enum_lab(ruangan[r]);
+                                if ((p[prak].r[(3*s_r)-21].count<9)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2208[(3*s_r)-21]);
+                                    p[prak].r[(3*s_r)-21].count++;
+                                    j[w][h].lab[l].count++;
+                                }
                                 printf("Ruangan 2:\n");
                                 r = input_ruangan(2,1);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2208[(3*s_r)-20]);
-                                p[prak].r[(3*s_r)-20].count++;
+                                l = str2enum_lab(ruangan[r]);
+                                if ((p[prak].r[(3*s_r)-20].count<9)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2208[(3*s_r)-20]);
+                                    p[prak].r[(3*s_r)-20].count++;
+                                    j[w][h].lab[l].count++;
+                                }
                                 printf("Ruangan 3:\n");
                                 r = input_ruangan(3,1);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2208[(3*s_r)-19]);
-                                p[prak].r[(3*s_r)-19].count++;
+                                l = str2enum_lab(ruangan[r]);
+                                if ((p[prak].r[(3*s_r)-19].count<9)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2208[(3*s_r)-19]);
+                                    p[prak].r[(3*s_r)-19].count++;
+                                    j[w][h].lab[l].count++;
+                                }
                                                             
                             }else if (s_r==-1)
                             {
@@ -229,17 +251,20 @@ void input_sch(jadwal_t j[][5], prak_t *p){
                                 w = input_minggu()-1;
                                 h = input_hari(prak,s_r);
                                 r = input_ruangan(0,1);
+                                l = str2enum_lab(ruangan[r]);
                                     //printf("Tes awal %d %d %d %s itu\n", w, h, r, p[prak].id);
-                    
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2208[s_r]);
+                                if ((p[prak].r[s_r].count<9)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
                                     
-                                p[prak].r[s_r].count++;
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
                                     
-                                }               
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2208[s_r]);
+                                        
+                                    p[prak].r[s_r].count++;
+                                    j[w][h].lab[l].count++;
+                                }
+                                    
+                            }               
                             break;
                         case 2:
                             printf("Rombongan (A atau B):\n");
@@ -249,22 +274,22 @@ void input_sch(jadwal_t j[][5], prak_t *p){
                                 w = input_minggu()-1;
                                 h = input_hari(prak,s_r);
                                 r = input_ruangan(0,1);
+                                l = str2enum_lab(ruangan[r]);
                                 // printf("Tes awal %d %d %d %s itu\n", w, h, r, p[prak].id);
-                    
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].prak,p[prak].id);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].id,ruangan[r]);
-                                    //printf("Rom %s\n",rombongan_2200[s_r]);
-                                strcpy(j[w][h].lab[str2enum_lab(ruangan[r])].rom,rombongan_2200[s_r]);
-                                p[prak].r[s_r].count++;
+                                if ((p[prak].r[s_r].count<5)&&(j[w][h].lab[l].count=0)){
+                                    strcpy(j[w][h].lab[l].prak,p[prak].id);
+                                    strcpy(j[w][h].lab[l].id,ruangan[r]);
+                                        //printf("Rom %s\n",rombongan_2200[s_r]);
+                                    strcpy(j[w][h].lab[l].rom,rombongan_2200[s_r]);
+                                    p[prak].r[s_r].count++;
+                                    j[w][h].lab[l].count++;
+                                }
                             }
-                            
-                            break;
-                    
-                        
+                            break;            
                     }
                         //printf("SR %d\n", s_r);
                     //printf("w %d h %d ruang %s\n",w,h,ruangan[r]);
-                    printf("Prak %s di Ruang %s Rombongan %s\n",j[w][h].lab[str2enum_lab(ruangan[r])].prak,j[w][h].lab[str2enum_lab(ruangan[r])].id,j[w][h].lab[str2enum_lab(ruangan[r])].rom);
+                    printf("Prak %s di Ruang %s Rombongan %s\n",j[w][h].lab[l].prak,j[w][h].lab[l].id,j[w][h].lab[l].rom);
                     
                 }while (s_r == -1);
                 
@@ -273,4 +298,8 @@ void input_sch(jadwal_t j[][5], prak_t *p){
             }   
         } while (prak == 3);
     }while ((strcmp(s,"Q")!=0)&&(strcmp(s,"q")!=0));
+}
+
+void auto_input_sch (jadwal_t j[][5], prak_t *p){
+
 }
