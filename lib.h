@@ -20,6 +20,7 @@ typedef struct
 
 typedef struct
 {
+    int count;
     char id[255];
     char prak[255];
     char rom[255];
@@ -86,6 +87,8 @@ int input_ruangan(int a, int b);
 int max_rom(int prak);
 
 void input_sch(jadwal_t j[][5], prak_t *p);
+
+void auto_input_sch(jadwal_t j[][5], prak_t *p);
 
 
 #endif
