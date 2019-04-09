@@ -21,6 +21,7 @@ typedef struct
 typedef struct
 {
     int count;
+    char assist[255];
     char id[255];
     char prak[255];
     char rom[255];
@@ -80,9 +81,9 @@ int syarat_rombongan(int r, char *s);
 
 int input_minggu();
 
-int input_hari(int prak, int s_r);
+int input_hari(int prak, int s_r, int w, jadwal_t j[][5]);
 
-int input_ruangan(int a, int b);
+int input_ruangan(int a, int b, jadwal_t l);
 
 int max_rom(int prak);
 
